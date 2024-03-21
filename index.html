@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+	<head>
+		<!-- Bootstrap required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+		<title>FODMAP</title>
+		<link rel="manifest" href="/manifest.webmanifest">
+		<link rel="apple-touch-icon" href="/icon192.png">
+		<link rel="apple-touch-startup-image" href="/icon192.png">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+		<link rel="stylesheet" href="jquery.dataTables.min.css">
+		<script language="JavaScript" src="jquery-3.5.1.min.js"></script>
+		<script language="JavaScript" src="jquery.dataTables.min.js"></script>
+		<style>
+			@media(prefers-color-scheme:dark) {
+				body.dark-mode {
+					background-color: #333 !important;
+					color: #fff !important;
+				}
+				.dark-mode .dataTables_wrapper {
+					background-color: #444 !important;
+					color: #fff !important;
+				}
+				.dark-mode th, .dark-mode td {
+					border-color: #666 !important;
+				}
+				.dark-mode .odd {
+					background-color: #555 !important;
+				}
+				.dark-mode .even {
+					background-color: #444 !important;
+				}	
+				.dark-mode .sorting_1 {
+					background-color: #444 !important;
+				}
+			}
+		</style>	
+		</head>
+		
+		<body class="dark-mode-off">
+			<header>
+				<h1>FODMAP</h1>
+			</header>
+			<hr>
+			<div id="fodmaptbldiv">
+				<table id="fodmaptbl" class="display dark">
+					<thead>
+						<tr><th>Food</th><th>Disposition</th><th>Classification</th></tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+			<footer>
+				<hr>
+				<div>
+					Copyright &copy; 2024 <a title='https://ensadi.com' href='https://ensadi.com/home' target='_blank'>Ensadi
+						LLC</a>
+					<a href="about.html">(About)</a>
+				</div>
+			</footer>
+			<script>
+				$(document).ready(function () {
+					$.getJSON('map.json').done(function (fodmap_data) {
+						$('#fodmaptbl').DataTable({
+							data: fodmap_data,
+							columns: [
+								{ data: "Food" },
+								{ data: "Disposition" },
+								{ data: "Classification" }
+							],
+							pageLength: 25
+						});
+					});
+				});
+				// make sure that the browser supports Service Workers and register if so.
+				if ('serviceWorker' in navigator) {
+					navigator.serviceWorker.register('/fdmp.js').then( function(reg) { 
+						// registration successful
+						console.log('Registration successful.');
+						console.log('Scope: ', reg.scope);
+					}).catch(function(error) {
+						// failed
+						console.log('Registration failed: ', error);
+					});
+						}
+					</script>
+			</body>
+		
+		</html>
+
