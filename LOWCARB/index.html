@@ -7,15 +7,12 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-		<title>FOODS</title>
-		<link rel="manifest" href="/manifest.webmanifest">
-		<link rel="apple-touch-icon" href="/icon192.png">
-		<link rel="apple-touch-startup-image" href="/icon192.png">
+		<title>LOW CARB</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-		<link rel="stylesheet" href="jquery.dataTables.min.css">
-		<script language="JavaScript" src="jquery-3.5.1.min.js"></script>
-		<script language="JavaScript" src="jquery.dataTables.min.js"></script>
+		<link rel="stylesheet" href="../jquery.dataTables.min.css">
+		<script language="JavaScript" src="../jquery-3.5.1.min.js"></script>
+		<script language="JavaScript" src="../jquery.dataTables.min.js"></script>
 		<style>
 			@media(prefers-color-scheme:dark) {
 				body.dark-mode {
@@ -44,14 +41,18 @@
 		
 		<body class="dark-mode-off">
 			<header>
-				<h1>FOODS</h1>
+				<h1>LOW CARB</h1>
 			</header>
+			<button onclick="window.location.href='/index.html';">Back</button>
 			<hr>
-			<div id="foodstbldiv">
-				<button onclick="window.location.href='FODMAP/index.html';">FODMAP</button>
-				<br>
-				<br>
-				<button onclick="window.location.href='LOWCARB/index.html';">LOW CARB</button>
+			<div id="locarbtbldiv">
+				<table id="lowcarbtbl" class="display dark">
+					<thead>
+						<tr><th>Food</th><th>Disposition</th><th>Category</th></tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
 			</div>
 			<footer>
 				<hr>
@@ -62,18 +63,20 @@
 				</div>
 			</footer>
 			<script>
-				// make sure that the browser supports Service Workers and register if so.
-				if ('serviceWorker' in navigator) {
-					navigator.serviceWorker.register('/fdmp.js').then( function(reg) { 
-						// registration successful
-						console.log('Registration successful.');
-						console.log('Scope: ', reg.scope);
-					}).catch(function(error) {
-						// failed
-						console.log('Registration failed: ', error);
+				$(document).ready(function () {
+					$.getJSON('lcmap.json').done(function (lowcarb_data) {
+						$('#lowcarbtbl').DataTable({
+							data: lowcarb_data,
+							columns: [
+								{ data: "Food" },
+								{ data: "Disposition" },
+								{ data: "Category" }
+							],
+							pageLength: 25
+						});
 					});
-						}
-					</script>
+				});
+				</script>
 			</body>
 		
 		</html>

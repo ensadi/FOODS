@@ -1,6 +1,6 @@
 {
-	"name": "FODMAP", 
-	"short_name": "FODMAP", 
+	"name": "FOODS", 
+	"short_name": "FOODS", 
 	"start_url": "/index.html", 
 	"display": "standalone", 
 	"icons": [

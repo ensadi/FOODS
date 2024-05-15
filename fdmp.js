@@ -1,7 +1,7 @@
-// FODMAP service worker file
+// FOODS service worker file
 
-const cacheName    = 'fodmap_v0.2'; // name of cache to use.
-const oldCacheName = 'fodmap_v0.1'; // name of cache from previous version of app. used to remove old cache.
+const cacheName    = 'foods_v0.2'; // name of cache to use.
+const oldCacheName = 'foods_v0.1'; // name of cache from previous version of app. used to remove old cache.
 
 // attach listener to 'beforeinstallprompt' event
 self.addEventListener('beforeinstallprompt', function(event) {
@@ -33,7 +33,10 @@ self.addEventListener('install', function(event) {
 				'jquery-3.5.1.min.js',
 				'jquery.dataTables.min.css',
 				'jquery.dataTables.min.js',
-				'map.json',
+				'FODMAP/fdmap.json',
+				'FODMAP/index.html',
+				'LOWCARB/lcmap.json',
+				'LOWCARB/index.html',
 				"offline.html" ])
 		)
 	);
