@@ -214,6 +214,7 @@
     {"Food": "avocado", "Disposition": "Serving Size: 1/4", "Classification": "Moderate"},
     {"Food": "cherries", "Disposition": "Serving Size: < 3", "Classification": "Moderate"},
     {"Food": "grapefruit", "Disposition": "Serving Size: 1/2 medium", "Classification": "Moderate"},
+    {"Food": "dragon fruit", "Disposition": "Serving Size: 1 medium", "Classification": "Moderate"},
     {"Food": "longon", "Disposition": "Serving Size: < 10", "Classification": "Moderate"},
     {"Food": "lychee", "Disposition": "Serving Size: < 5", "Classification": "Moderate"},
     {"Food": "pomegranate", "Disposition": "Serving Size: 1/2 small", "Classification": "Moderate"},
