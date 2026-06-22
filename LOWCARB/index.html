@@ -14,67 +14,201 @@
 		<script language="JavaScript" src="../jquery-3.5.1.min.js"></script>
 		<script language="JavaScript" src="../jquery.dataTables.min.js"></script>
 		<style>
-			@media(prefers-color-scheme:dark) {
-				body.dark-mode {
-					background-color: #333 !important;
-					color: #fff !important;
-				}
-				.dark-mode .dataTables_wrapper {
-					background-color: #444 !important;
-					color: #fff !important;
-				}
-				.dark-mode th, .dark-mode td {
-					border-color: #666 !important;
-				}
-				.dark-mode .odd {
-					background-color: #555 !important;
-				}
-				.dark-mode .even {
-					background-color: #444 !important;
-				}	
-				.dark-mode .sorting_1 {
-					background-color: #444 !important;
-				}
+			:root {
+				color-scheme: dark;
+				color: #f3f3f3;
+				background: radial-gradient(circle at top, #2e4041 0%, #16202b 42%, #0a1218 100%);
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+			}
+			* {
+				box-sizing: border-box;
+			}
+			body {
+				margin: 0;
+				min-height: 100vh;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 24px;
+				background: radial-gradient(circle at top, rgba(74, 140, 170, 0.16), transparent 40%), radial-gradient(circle at 80% 15%, rgba(103, 204, 160, 0.16), transparent 23%), #0b151f;
+			}
+			.page-shell {
+				width: 100%;
+				max-width: 1000px;
+			}
+			.panel {
+				background: rgba(26, 42, 56, 0.96);
+				border: 1px solid rgba(255,255,255,0.08);
+				border-radius: 28px;
+				box-shadow: 0 28px 80px rgba(0,0,0,0.32);
+				padding: 2rem;
+				backdrop-filter: blur(16px);
+			}
+			header {
+				text-align: center;
+				margin-bottom: 1.25rem;
+			}
+			header h1 {
+				margin: 0;
+				font-size: clamp(2.5rem, 4vw, 3.4rem);
+				letter-spacing: -0.04em;
+			}
+			header p {
+				margin: 0.85rem auto 0;
+				color: #c8d7df;
+				max-width: 42rem;
+				font-size: 1rem;
+			}
+			.action-link {
+				display: inline-block;
+				padding: 0.95rem 1.35rem;
+				margin-bottom: 1rem;
+				border-radius: 18px;
+				color: #fff;
+				background: linear-gradient(135deg, #3eab8c 0%, #2f7dc1 100%);
+				text-decoration: none;
+				font-weight: 700;
+				box-shadow: 0 16px 34px rgba(0,0,0,0.22);
+				transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+			}
+			.action-link:hover,
+			.action-link:focus-visible {
+				transform: translateY(-2px);
+				box-shadow: 0 20px 38px rgba(0,0,0,0.28);
+				background: linear-gradient(135deg, #48c29d 0%, #4098e5 100%);
+			}
+			footer {
+				margin-top: 1.75rem;
+				font-size: 0.94rem;
+				color: #8fa7b4;
+				text-align: center;
+			}
+			footer a {
+				color: inherit;
+				text-decoration: underline;
+			}
+			.dataTables_wrapper {
+				background: transparent !important;
+				color: #0d1720 !important;
+			}
+			.dataTables_wrapper .dataTables_length,
+			.dataTables_wrapper .dataTables_filter,
+			.dataTables_wrapper .dataTables_info,
+			.dataTables_wrapper .dataTables_paginate {
+				color: #d8e3ea !important;
+			}
+			.dataTables_wrapper select,
+			.dataTables_wrapper input {
+				color: #0d1720 !important;
+				background: #f6fbff !important;
+				border: 1px solid #c8d7e1 !important;
+			}
+			.dataTables_wrapper .dataTables_paginate a {
+				color: #0f3b5c !important;
+				background: #e7f2fb !important;
+				border: none !important;
+				border-radius: 10px;
+				padding: 0.55rem 0.85rem;
+			}
+			.dataTables_wrapper .dataTables_paginate .current {
+				background: #2f7dc1 !important;
+				color: #fff !important;
+			}
+			#fodmaptbl,
+			#lowcarbtbl {
+				width: 100%;
+				border-collapse: collapse;
+				background: #f8fbff;
+				color: #0d1720;
+			}
+			#fodmaptbl thead th,
+			#lowcarbtbl thead th {
+				background: #164a77;
+				color: #f6fbff;
+				border-bottom: 2px solid rgba(255,255,255,0.18);
+				padding: 0.95rem 1rem;
+				text-align: left;
+			}
+			#fodmaptbl tbody tr,
+			#lowcarbtbl tbody tr {
+				background: #ffffff;
+				color: #0d1720;
+			}
+			#fodmaptbl tbody tr.odd,
+			#lowcarbtbl tbody tr.odd {
+				background: #f0f6fb;
+			}
+			#fodmaptbl tbody tr:hover,
+			#lowcarbtbl tbody tr:hover {
+				background: #d4e9f9;
+			}
+			#fodmaptbl td,
+			#lowcarbtbl td {
+				padding: 0.9rem 1rem;
+				border: 1px solid #d4dde6;
+				color: #0d1720;
+			}
+			#fodmaptbldiv,
+			#locarbtbldiv {
+				overflow-x: auto;
+			}
+			@media(max-width: 860px) {
+				body { padding: 16px; }
+				.panel { padding: 1.5rem; }
 			}
 		</style>	
 		</head>
 		
-		<body class="dark-mode-off">
-			<header>
-				<h1>LOW CARB</h1>
-			</header>
-			<button onclick="window.location.href='/index.html';">Back</button>
-			<hr>
-			<div id="locarbtbldiv">
-				<table id="lowcarbtbl" class="display dark">
-					<thead>
-						<tr><th>Food</th><th>Disposition</th><th>Category</th></tr>
-					</thead>
-					<tbody>
-					</tbody>
-				</table>
-			</div>
-			<footer>
-				<hr>
-				<div>
-					Copyright &copy; 2024 <a title='https://ensadi.com' href='https://ensadi.com/home' target='_blank'>Ensadi
-						LLC</a>
-					<a href="about.html">(About)</a>
+		<body>
+			<div class="page-shell">
+				<div class="panel">
+					<header>
+						<h1>LOW CARB</h1>
+						<p>Search and sort low-carb foods quickly. The table below helps you browse results faster.</p>
+					</header>
+					<a class="action-link" href="../index.html">Back to FOODS</a>
+					<div id="locarbtbldiv">
+						<table id="lowcarbtbl" class="display dark">
+							<thead>
+								<tr><th>Food</th><th>Disposition</th><th>Category</th></tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
 				</div>
-			</footer>
+				<footer>
+					<hr>
+					<div>Copyright &copy; 2024-2026 <a title="https://ensadi.com" href="https://ensadi.com" target="_blank" rel="noreferrer noopener">Ensadi LLC</a> · <a href="../about.html">About</a></div>
+				</footer>
+			</div>
 			<script>
 				$(document).ready(function () {
+					var lowcarbTable;
+					function redrawLowcarbTable() {
+						if (!lowcarbTable) {
+							return;
+						}
+						setTimeout(function () {
+							lowcarbTable.columns.adjust().draw(false);
+						}, 120);
+					}
 					$.getJSON('lcmap.json').done(function (lowcarb_data) {
-						$('#lowcarbtbl').DataTable({
+						lowcarbTable = $('#lowcarbtbl').DataTable({
 							data: lowcarb_data,
 							columns: [
 								{ data: "Food" },
 								{ data: "Disposition" },
 								{ data: "Category" }
 							],
+							autoWidth: false,
+							responsive: true,
 							pageLength: 25
 						});
 					});
+					$(window).on('resize orientationchange', redrawLowcarbTable);
+					window.addEventListener('resize', redrawLowcarbTable);
+					window.addEventListener('orientationchange', redrawLowcarbTable);
 				});
 				</script>
 			</body>

@@ -2,5 +2,5 @@
 .PHONY: test
 
 test:
-	python -m SimpleHTTPServer
+	python3 -m http.server
 
